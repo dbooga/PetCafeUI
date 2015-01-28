@@ -1,0 +1,37 @@
+package com.teampetcafe.petcafeui;
+
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+public class FragmentBlogContainer extends Fragment {  
+
+   public static FragmentBlogContainer newInstance() {
+	   FragmentBlogContainer fragment = new FragmentBlogContainer();  
+     return fragment;  
+   }  
+
+   public FragmentBlogContainer() {  
+   }  
+
+   @Override  
+   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {  
+       View rootView = inflater.inflate(R.layout.fragment_blog_container, container, false);  
+       
+       Fragment videoFragment = new FragmentBlogContainer();
+       FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+       transaction.add(R.id.video_fragment, videoFragment).commit();
+       
+       return rootView;  
+   }  
+
+   @Override  
+   public void onAttach(Activity activity) {  
+       super.onAttach(activity);  
+       ((MainActivity) activity).onSectionAttached(1);  
+   }  
+}  

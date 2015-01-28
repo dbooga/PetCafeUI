@@ -45,32 +45,45 @@ public class MainActivity extends Activity implements
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+		// Start Activity with main fragment
+		FragmentManager fragmentManager = getFragmentManager();
+		fragmentManager.beginTransaction()
+				.replace(R.id.container, FragmentBlogContainer.newInstance())
+				.commit();
 	}
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getFragmentManager();
-		if (position == 2){
-		fragmentManager.beginTransaction()
-				.replace(R.id.container, FragmentProfile.newInstance())
-				.commit();
+		if (position == 2) {
+			fragmentManager.beginTransaction()
+					.replace(R.id.container, FragmentProfile.newInstance())
+					.commit();
 		}
-		/*
-		 * switch(position){ case 0: fragmentManager.beginTransaction()
-		 * .replace(R.id.container, FragmentProfile.newInstance()) .commit();
-		 * 
-		 * break; case 1:
-		 * 
-		 * fragmentManager.beginTransaction() .replace(R.id.container,
-		 * SecondFragment.newInstance()) .commit(); break; case 2:
-		 * 
-		 * fragmentManager.beginTransaction() .replace(R.id.container,
-		 * ThirdFragment.newInstance()) .commit(); break;
-		 * 
-		 * }
-		 */
+/*
+		switch (position) {
+		case 0:
+			fragmentManager.beginTransaction()
+					.replace(R.id.container, FragmentProfile.newInstance())
+					.commit();
 
+			break;
+		case 1:
+
+			fragmentManager.beginTransaction()
+					.replace(R.id.container, SecondFragment.newInstance())
+					.commit();
+			break;
+		case 2:
+
+			fragmentManager.beginTransaction()
+					.replace(R.id.container, ThirdFragment.newInstance())
+					.commit();
+			break;
+
+		}
+*/
 	}
 
 	public void onSectionAttached(int number) {

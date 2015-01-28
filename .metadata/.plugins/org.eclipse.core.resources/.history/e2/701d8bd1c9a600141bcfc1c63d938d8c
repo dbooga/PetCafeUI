@@ -1,0 +1,57 @@
+package com.teampetcafe.petcafeui;
+
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.teampetcafe.petcafeui.adapter.TabsPagerAdapter;
+
+public class FragmentBlogContainer extends Fragment {  
+	
+	private ViewPager viewPager;
+	private TabsPagerAdapter mAdapter;
+	private ActionBar actionBar;
+	// Tab titles
+	private String[] tabs = { "Blog 1", "Blog 2", "Blog 3" };
+
+   public static FragmentBlogContainer newInstance() {
+	   FragmentBlogContainer fragment = new FragmentBlogContainer();  
+     return fragment;  
+   }  
+
+   public FragmentBlogContainer() {  
+   }  
+
+   @Override  
+   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {  
+       View rootView = inflater.inflate(R.layout.fragment_blog_container, container, false);  
+       
+       Fragment videoFragment = new FragmentBlogContainer();
+       FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+       transaction.add(R.id.video_fragment, videoFragment).commit();
+       
+		// Initilization
+		viewPager = (ViewPager) findViewById(R.id.pager);
+		actionBar = getActionBar();
+		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+
+		viewPager.setAdapter(mAdapter);
+		actionBar.setHomeButtonEnabled(true);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		
+       
+       return rootView;  
+   }  
+
+   @Override  
+   public void onAttach(Activity activity) {  
+       super.onAttach(activity);  
+       ((MainActivity) activity).onSectionAttached(1);  
+   }  
+}  
